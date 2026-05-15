@@ -214,6 +214,7 @@ select {
 
 .rack-grid {
   display: grid;
+  grid-auto-rows: minmax(80px, 1fr);
   gap: 6px;
   overflow: auto;
   min-height: 0;
@@ -223,12 +224,18 @@ select {
 
 .rack-slot {
   position: relative;
-  min-height: 34px;
-  padding: 8px 10px;
+  min-height: 80px;
+  padding: 12px 10px;
   display: grid;
   grid-template-columns: 56px 1fr auto;
   align-items: center;
   gap: 10px;
+}
+
+.rack-slot.covering-slot {
+  min-height: 0;
+  padding: 0 10px;
+  overflow: hidden;
 }
 
 .rack-slot .slot-index {
@@ -238,10 +245,14 @@ select {
 
 .rack-slot .slot-name {
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.95rem;
 }
 
 .rack-slot.empty-slot .slot-name {
-  color: var(--muted);
+  display: none;
 }
 
 .rack-slot.hot-zone {

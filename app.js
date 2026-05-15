@@ -272,8 +272,14 @@ function renderRack() {
     const hotZone = coveringDevice && isHotDevice(coveringDevice);
     const isAnchor = occupant !== null;
 
-    slot.className = `rack-slot ${coveringDevice ? "occupied-slot" : "empty-slot"}${hotZone ? " hot-zone" : ""}`;
+    slot.className = `rack-slot ${coveringDevice ? "occupied-slot" : "empty-slot"}${hotZone ? " hot-zone" : ""}${!isAnchor && coveringDevice ? " covering-slot" : ""}`;
     slot.dataset.topU = String(topU);
+    
+    // 다중 U 장비의 높이 조정
+    if (isAnchor) {
+      slot.style.minHeight = `${occupant.height * 80}px`;
+    }
+    
     slot.innerHTML = isAnchor
       ? `
         <span class="slot-index">U${topU}</span>
